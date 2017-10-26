@@ -10,3 +10,11 @@
 This will create a file 'tidy.txt' in your working directory and also return the tidy'ed up data.frame to be used for your analysis.
 
 You can read in the text file with the following command: `tidy2 <- read.table("./tidy.txt", header=TRUE)`.  The only difference between the files is the factor level ordering in the 'activity' column.  If you want the ordering of the factor to be like the original raw data files you can run this command: `tidy2$activity <- factor(tidy2$activity, c("WALKING", "WALKING_UPSTAIRS", "WALKING_DOWNSTAIRS", "SITTING", "STANDING", "LAYING"))`
+
+## Additional references
+The CodeBook.md file contains additional details including:
+1. A 'CodeBook' section describing the structure of the output dataset.
+2. A 'Summary detail' section describing the major steps of the 'run_analysis.R' file as well as the choices made & rationale for the each step.
+3. A 'Study design' section describing the raw input files and how they were ultimately used.
+
+Finally the 'run_analysis.R' file has been commented pretty heavily and can be referred to for additional details.
