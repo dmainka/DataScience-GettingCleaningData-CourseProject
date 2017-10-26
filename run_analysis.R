@@ -43,6 +43,8 @@ run_analysis <- function()
     
     
     # 3.  Uses descriptive activity names to name the activities in the data set. --------
+    print("3. Changing to descriptive activity names in the data set...")
+    
     activity_labels <- read.table("./UCI HAR Dataset/activity_labels.txt", col.names=c("value", "label"), as.is=TRUE)
     
     # convert to a factor keeping the same numeric values as the original data had (to avoid confusion)
@@ -52,6 +54,8 @@ run_analysis <- function()
     
     
     # 4.  Appropriately labels the data set with descriptive variable names. --------
+    print("4. Renaming the variables with descriptive varaible names...")
+    
     features$name <- gsub("()", "", features$name, fixed=TRUE) #remove parentheses
     features$name <- gsub("^f+", "frequency.", features$name) #replace first letter 'f' with 'frequency.'
     features$name <- gsub("^t+", "time.", features$name) #replace first letter 't' with 'time.'
@@ -62,9 +66,15 @@ run_analysis <- function()
     
     
     # 5.  From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. --------
+    print("5. Aggregating using the average for each activity and each subject...")
+    
     tidy <- aggregate(data[, -(1:2)], by=list(subject=data$subject, activity=data$activity), FUN=mean)
 
-    write.table(x=tidy, file='tidy.txt', row.names=FALSE)
+    
+    # 6. Writing output to file './tidy.txt'. --------
+    print("6. Writing output to file './tidy.txt'...")
+    
+    write.table(x=tidy, file='./tidy.txt', row.names=FALSE)
     
     # Checks to ensure the write function gets read in and equals the returned data.frame.  (These have been intentionally commented out)
     #tidy2 <- read.table("./tidy.txt", header=TRUE)
@@ -73,5 +83,7 @@ run_analysis <- function()
     #identical(tidy2[, 2], tidy[, 2])
     #max(abs(tidy2[,3:68]-tidy[,3:68]))
 
+    print("Done.")
+    
     return(tidy)
 }
