@@ -64,7 +64,7 @@ run_analysis <- function()
     # 5.  From the data set in step 4, creates a second, independent tidy data set with the average of each variable for each activity and each subject. --------
     tidy <- aggregate(data[, -(1:2)], by=list(subject=data$subject, activity=data$activity), FUN=mean)
 
-    write.table(x=tidy, file='tidy.txt' )
+    write.table(x=tidy, file='tidy.txt', row.names=FALSE)
     
     # Checks to ensure the write function gets read in and equals the returned data.frame.  (These have been intentionally commented out)
     #tidy2 <- read.table("./tidy.txt", header=TRUE)
